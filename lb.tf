@@ -10,6 +10,12 @@ resource "aws_lb" "sandbox_lb" {
     },
     local.tags
   )
+  lifecycle {
+    ignore_changes = [
+      tags["ams:rt:ams-monitoring-policy"],
+      tags_all["ams:rt:ams-monitoring-policy"]
+    ]
+  }
 }
 
 resource "aws_lb_listener" "lb_listener" {
