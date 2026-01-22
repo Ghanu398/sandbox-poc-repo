@@ -11,5 +11,5 @@ locals {
     }
 
   )
-
+  lb_subnets = toset([for s in aws_subnet.subent : s.id if strcontains(s.tags["Name"], "private")])
 }

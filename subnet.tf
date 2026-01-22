@@ -6,7 +6,7 @@ resource "aws_subnet" "subent" {
   map_public_ip_on_launch = each.value.type == "public" ? true : false
   tags = merge(
     {
-      Name = each.value.name
+      Name = "${each.value.name}-${var.aws_region}"
     },
     local.tags
   )

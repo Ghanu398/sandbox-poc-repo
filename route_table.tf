@@ -3,7 +3,7 @@ resource "aws_route_table" "public_route_table" {
 
   tags = merge(
     {
-      Name = "sandbox-poc-public-route-table"
+      Name = "sandbox-poc-public-route-table-${var.aws_region}"
     },
     local.tags
   )
@@ -21,7 +21,7 @@ resource "aws_route_table" "private_route_table" {
 
   tags = merge(
     {
-      Name = "sandbox-poc-private-route-table"
+      Name = "sandbox-poc-private-route-table-${var.aws_region}"
     },
     local.tags
   )

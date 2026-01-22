@@ -4,7 +4,7 @@ resource "aws_vpc" "sandbox_vpc" {
   enable_dns_support   = var.enable_dns_support
   tags = merge(
     {
-      Name = "sandbox-poc-vpc-rt-53"
+      Name = "sandbox-poc-vpc-rt-53-${var.aws_region}"
     },
     local.tags
   )

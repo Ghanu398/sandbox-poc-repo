@@ -1,5 +1,5 @@
 resource "aws_key_pair" "aws_key_pair" {
-  key_name   = "sandbox-poc-key"
+  key_name   = "sandbox-poc-key--${var.aws_region}"
   public_key = tls_private_key.pk.public_key_openssh
 }
 
@@ -11,5 +11,5 @@ resource "tls_private_key" "pk" {
 
 resource "local_file" "file" {
   content  = tls_private_key.pk.private_key_pem
-  filename = "${path.module}/sandbox-key.pem"
+  filename = "${path.module}/sandbox-key-${var.aws_region}.pem"
 }

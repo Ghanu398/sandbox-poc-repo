@@ -3,7 +3,7 @@ resource "aws_internet_gateway" "igw" {
 
   tags = merge(
     {
-      Name = "sandbox-poc-igw"
+      Name = "sandbox-poc-igw--${var.aws_region}"
     },
     local.tags
   )

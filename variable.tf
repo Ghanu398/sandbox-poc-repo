@@ -58,3 +58,9 @@ variable "policy_arn" {
   description = "policy arn for ec2 iam role"
   type        = list(string)
 }
+
+variable "aws_region" {
+  description = "AWS region"
+  type        = string
+  default     = "us-east-1"
+}
