@@ -11,5 +11,6 @@ locals {
     }
 
   )
-  lb_subnets = toset([for s in aws_subnet.subent : s.id if strcontains(s.tags["Name"], "private")])
+  lb_subnets    = toset([for s in aws_subnet.subent : s.id if strcontains(s.tags["Name"], "private")])
+  nat_subnet_id = one([for v in aws_subnet.subent : v.id if can(regex("public", (lower(v.tags["Name"]))))])
 }
