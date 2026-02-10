@@ -1,9 +1,9 @@
 resource "aws_cloudwatch_metric_alarm" "sandbox_alarm" {
   alarm_name          = "sandbox-poc-alarm-${var.aws_region}"
   comparison_operator = "LessThanThreshold"
-  evaluation_periods  = "2"
-  metric_name         = "status"
-  namespace           = "custom-metrics"
+  evaluation_periods  = "1"
+  metric_name         = "HttpdRunningFromFile"
+  namespace           = "Custom/ServiceMetrics"
   period              = "60"
   statistic           = "Minimum"
   threshold           = "1"
