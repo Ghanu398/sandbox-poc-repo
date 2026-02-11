@@ -2,7 +2,11 @@ provider "aws" {
   profile = "terraform"
   region  = var.aws_region
 }
-
+provider "aws" {
+  alias  = "use1"
+  profile = "terraform"
+  region = "us-east-1"
+}
 terraform {
   backend "s3" {
     bucket  = "sandbox-terraform-state-bucket-1234"

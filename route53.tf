@@ -21,7 +21,7 @@ resource "aws_route53_zone" "sandbox_zone" {
 resource "aws_route53_health_check" "sandbox_health_check" {
   count                   = var.aws_region == "us-east-2" ? 1 : 0
   type                    = "CLOUDWATCH_METRIC"
-  cloudwatch_alarm_name   = aws_cloudwatch_metric_alarm.sandbox_alarm.alarm_name
+  cloudwatch_alarm_name   = one(aws_cloudwatch_metric_alarm.sandbox_alarm[*].alarm_name)
   cloudwatch_alarm_region = var.aws_region
   tags = merge(
     {

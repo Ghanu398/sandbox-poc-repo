@@ -5,14 +5,14 @@ set -e
 # 1. Update and install packages
 # -------------------------------
 sudo yum update -y
-sudo yum install httpd -y
+sudo yum install -y awscli httpd
 # -------------------------------
 # 2. Start HTTPD
 # -------------------------------
-echo "Hello from $(hostname -f)-us-east-1" > /var/www/html/index.html
+echo "Hello from $(hostname -f)" > /var/www/html/index.html
 sudo systemctl enable httpd
 sudo systemctl start httpd
-mkdir testings
+
 # -------------------------------
 # 3. Create combined monitoring script
 # -------------------------------
@@ -21,31 +21,10 @@ cat <<'EOF' > /opt/combined_monitor.sh
 
 DNS_NAME="failover.ghanshyam.site"
 CW_REGION="us-east-2"
-CW_REGION1="us-east-1"
+
+
 while true
 do
-  ####################################
-  # PART 1 — HTTPD SERVICE MONITORING
-  ####################################
-  STATUS=$(systemctl is-active httpd)
-
-  if [ "$STATUS" = "active" ]; then
-    HTTPD_VALUE=1
-  else
-    HTTPD_VALUE=0
-  fi
-
-  TIMESTAMP=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
-
-  aws cloudwatch put-metric-data \
-    --namespace "Custom/ServiceMetrics" \
-    --metric-name "HttpdServiceRunning" \
-    --value "$HTTPD_VALUE" \
-    --unit Count \
-    --timestamp "$TIMESTAMP" \
-    --storage-resolution 1 \
-    --region "$CW_REGION"
-
   ####################################
   # PART 2 — ROUTE53 TRAFFIC CHECK
   ####################################
@@ -68,7 +47,7 @@ do
     --unit Count \
     --timestamp "$TIMESTAMP" \
     --storage-resolution 1 \
-    --region "$CW_REGION1"
+    --region "$CW_REGION"
 
   sleep 1
 done

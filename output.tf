@@ -13,3 +13,8 @@ output "us-east-1_lb" {
 output "instance_profile_1" {
   value = data.aws_iam_instance_profile.sandbox_ec2_instance_profile[*].name
 }
+
+output "subnet_nameee" {
+  value = [for  s in aws_subnet.subent : s.tags["Name"] if s.tags["Name"] != "sandbox-poc-public-subnet-1-${var.aws_region}" && s.tags["Name"] != "sandbox-poc-private-subnet-2-${var.aws_region}"]
+
+}
