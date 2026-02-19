@@ -29,6 +29,7 @@ do
   # PART 2 — ROUTE53 TRAFFIC CHECK
   ####################################
   RESPONSE=$(curl -s --max-time 2 http://$DNS_NAME)
+  TIMESTAMP=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
 
   REGION_FOUND=$(echo "$RESPONSE" | grep -oE 'us-east-[0-9]' | head -n1)
 

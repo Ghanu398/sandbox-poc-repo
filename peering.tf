@@ -20,6 +20,7 @@ resource "aws_vpc_peering_connection_accepter" "peer_accept" {
   tags = merge(local.tags, {
     Name = "sandbox-poc-vpc-peering-accept"
   })
+  depends_on = [ aws_vpc_peering_connection.perring_connection ]
 }
 
 
@@ -30,6 +31,7 @@ resource "aws_vpc_peering_connection_options" "requester" {
   requester {
     allow_remote_vpc_dns_resolution = true
   }
+  depends_on = [ aws_vpc_peering_connection.perring_connection ]
 }
 
 resource "aws_vpc_peering_connection_options" "accepter" {
@@ -40,4 +42,5 @@ resource "aws_vpc_peering_connection_options" "accepter" {
   accepter {
     allow_remote_vpc_dns_resolution = true
   }
+  depends_on = [ aws_vpc_peering_connection.perring_connection ]
 }
