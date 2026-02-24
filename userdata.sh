@@ -19,7 +19,7 @@ mkdir testings
 cat <<'EOF' > /opt/combined_monitor.sh
 #!/bin/bash
 
-DNS_NAME="failover.ghanshyam.site"
+DNS_NAME="gslb.sandbox45r53.net"
 CW_REGION="us-east-2"
 CW_REGION1="us-east-1"
 while true

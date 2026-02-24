@@ -23,3 +23,11 @@ resource "aws_route" "peering_route" {
   depends_on             = [aws_route_table.private_route_table]
 
 }
+
+resource "aws_route" "peering_route_2" {
+  count = var.aws_region == "us-east-2" ? 1 : 0
+  route_table_id         = one(data.aws_route_table.private_route_table_1[*].id)
+  destination_cidr_block = "100.0.0.0/16"
+  vpc_peering_connection_id = one(aws_vpc_peering_connection.perring_connection[*].id)
+ provider = aws.use1
+}

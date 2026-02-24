@@ -49,3 +49,13 @@ data "aws_iam_instance_profile" "sandbox_ec2_instance_profile" {
   count = var.aws_region == "us-east-2" ? 1 : 0
   name  = "sandbox-poc-ec2-instance-profile"
 }
+
+
+data "aws_route_table" "private_route_table_1" {
+  count = var.aws_region == "us-east-2" ? 1 : 0
+  filter {
+    name   = "tag:Name"
+    values = ["sandbox-poc-private-route-table-us-east-1"]
+  }
+  region = "us-east-1"
+}

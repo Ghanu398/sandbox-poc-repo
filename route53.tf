@@ -1,6 +1,6 @@
 resource "aws_route53_zone" "sandbox_zone" {
   count = var.aws_region == "us-east-2" ? 1 : 0
-  name  = "ghanshyam.site"
+  name  = "sandbox45r53.net"
   vpc {
     vpc_id     = aws_vpc.sandbox_vpc.id
     vpc_region = var.aws_region
@@ -35,7 +35,7 @@ resource "aws_route53_health_check" "sandbox_health_check" {
 resource "aws_route53_record" "failover" {
   count   = var.aws_region == "us-east-2" ? 1 : 0
   zone_id = one(aws_route53_zone.sandbox_zone[*].zone_id)
-  name    = "failover.ghanshyam.site"
+  name    = "gslb.sandbox45r53.net"
   type    = "A"
 
   set_identifier  = "Primary"
@@ -56,7 +56,7 @@ resource "aws_route53_record" "failover" {
 resource "aws_route53_record" "failover_routing_policy" {
   count          = var.aws_region == "us-east-2" ? 1 : 0
   zone_id        = one(aws_route53_zone.sandbox_zone[*].zone_id)
-  name           = "failover.ghanshyam.site"
+  name           = "gslb.sandbox45r53.net"
   type           = "A"
   set_identifier = "Secondary"
   alias {
