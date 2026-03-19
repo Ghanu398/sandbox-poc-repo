@@ -33,3 +33,21 @@ resource "aws_route_table_association" "private_route_table_association" {
   route_table_id = aws_route_table.private_route_table.id
 }
 
+
+
+resource "aws_route_table" "standalone_route_table" {
+  vpc_id = aws_vpc.sandbox_vpc.id
+
+  tags = merge(
+    {
+      Name = "standalone-route-table-${var.aws_region}"
+    },
+    local.tags
+  )
+  
+}
+
+resource "aws_route_table_association" "standalone_route_table_association" {
+  subnet_id      = aws_subnet.subent2.id
+  route_table_id = aws_route_table.standalone_route_table.id
+}

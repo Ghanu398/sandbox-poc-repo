@@ -14,6 +14,11 @@ variable "subnets" {
   }))
 }
 
+variable "subnet2_cidr_block" {
+  description = "The CIDR block for the second subnet"
+  type        = string
+  default = ""
+}
 variable "enable_dns_hostnames" {
   description = "Enable DNS hostnames"
   type        = bool

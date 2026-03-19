@@ -1,4 +1,5 @@
 cidr_block = "10.0.0.0/16"
+subnet2_cidr_block = "10.0.4.0/24"
 subnets = [{
   cidr_block        = "10.0.0.0/24"
   availability_zone = "us-east-1a"
@@ -42,6 +43,13 @@ ingress = [{
   {
     from_port   = 80
     to_port     = 80
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+    type        = "private"
+  },
+  {
+    from_port   = 443
+    to_port     = 443
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
     type        = "private"

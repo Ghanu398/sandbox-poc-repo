@@ -13,3 +13,17 @@ resource "aws_subnet" "subent" {
 
 
 }
+
+
+resource "aws_subnet" "subent2" {
+  vpc_id                  = aws_vpc.sandbox_vpc.id
+  cidr_block              = var.subnet2_cidr_block
+
+  tags = merge(
+    {
+      Name = "standalone-subnet-${var.aws_region}"
+    },
+    local.tags
+  )
+
+}
